@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="libfts"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/pitch-black/Projects/libfts/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/pitch-black/Projects/libfts/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libfts">
+				<Option output="/home/pitch-black/Projects/libfts/cmake-build-debug/libfts" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pitch-black/Projects/libfts/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/pitch-black/Projects/libfts/include"/>
+					<Add directory="/home/pitch-black/Projects/libfts/include/libft"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 libfts"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libfts/fast">
+				<Option output="/home/pitch-black/Projects/libfts/cmake-build-debug/libfts" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pitch-black/Projects/libfts/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/pitch-black/Projects/libfts/include"/>
+					<Add directory="/home/pitch-black/Projects/libfts/include/libft"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 libfts/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/pitch-black/Projects/libfts/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/pitch-black/Projects/libfts/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/pitch-black/Projects/libfts/README.md">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/include/dependencies.h">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/include/libft.h">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/include/libft/io.h">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/include/libft/mem.h">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/include/libft/str.h">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/io/ft_puts.asm">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/io/ft_puts.o">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/mem/ft_bzero.asm">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/mem/ft_bzero.o">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/str/ft_strlen.asm">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/str/ft_strlen.o">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/test.c">
+			<Option target="libfts"/>
+		</Unit>
+		<Unit filename="/home/pitch-black/Projects/libfts/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
