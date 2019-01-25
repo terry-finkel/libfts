@@ -1,23 +1,34 @@
 #include "libfts.h"
+#include <ctype.h>
+#include <limits.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+
 #define FT_BZERO_TEST   true
 #define FT_STRCAT_TEST  true
+#define FT_ISALPHA_TEST true
+#define FT_ISDIGIT_TEST true
+#define FT_ISALNUM_TEST true
+#define FT_ISASCII_TEST true
+#define FT_ISPRINT_TEST true
 #define FT_PUTS_TEST    true
 #define FT_STRLEN_TEST  true
+#define FT_TOUPPER_TEST true
+#define FT_TOLOWER_TEST true
 
-const char 		*__ft_bzero_str__ = "Le caca c'est bien mais le miel c'est quand meme beaucoup mieux...";
+
 const char      *__empty_string__ = "";
+const char 		*__ft_bzero_str__ = "Le caca c'est bien mais le miel c'est quand meme beaucoup mieux...";
 const char      *__ft_strcat_str_1__ = "Le miel e";
 const char      *__ft_strcat_str_2__ = "t la foret!";
 
 
 int     main(void) {
-	bool 			success;
+	bool 			success = true;
 	const size_t	__ft_bzero_str_len__ = strlen(__ft_bzero_str__),
 	                __ft_strcat_str_1_len__ = strlen(__ft_strcat_str_1__),
 	                __ft_strcat_str_2_len__ = strlen(__ft_strcat_str_2__);
@@ -26,7 +37,6 @@ int     main(void) {
 	                *__ft_bzero__ = (char *)malloc(sizeof(char) * __ft_bzero_str_len__ + 1);
 
 #if FT_BZERO_TEST == true
-	success = true;
 	printf("\x1b[1;33mStarting test for ft_bzero...\x1b[0m\n");
 	printf("- Buffering test string in memory...\n");
     snprintf(__ft_bzero__, __ft_bzero_str_len__ + 1, "%s", __ft_bzero_str__);
@@ -73,6 +83,96 @@ int     main(void) {
     bool success2 = !strcmp(__strcat__, __ft_strcat__) ? true : false;
     printf(" - TEST2, status: %s\n", success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
     printf(" - \x1b[1;33mft_strcat, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
+#endif
+
+#if FT_ISALPHA_TEST == true
+    success = true;
+    printf("\n\x1b[1;33mStarting test for ft_isalpha...\x1b[0m\n");
+    for (unsigned char c = 0; c < UCHAR_MAX; c++) {
+        if (ft_isalpha(c) != isalpha(c)) {
+            success = false;
+            break;
+        }
+    }
+    if (ft_isalpha(UCHAR_MAX) != isalpha(UCHAR_MAX)) success = false;
+    printf(" - \x1b[1;33mft_isalpha, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
+#endif
+
+#if FT_ISDIGIT_TEST == true
+    success = true;
+    printf("\n\x1b[1;33mStarting test for ft_isdigit...\x1b[0m\n");
+    for (unsigned char c = 0; c < UCHAR_MAX; c++) {
+        if (ft_isdigit(c) != isdigit(c)) {
+            success = false;
+            break;
+        }
+    }
+    if (ft_isdigit(UCHAR_MAX) != isdigit(UCHAR_MAX)) success = false;
+    printf(" - \x1b[1;33mft_isdigit, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
+#endif
+
+#if FT_ISALNUM_TEST == true
+    success = true;
+    printf("\n\x1b[1;33mStarting test for ft_isalnum...\x1b[0m\n");
+    for (unsigned char c = 0; c < UCHAR_MAX; c++) {
+        if (ft_isalnum(c) != isalnum(c)) {
+            success = false;
+            break;
+        }
+    }
+    if (ft_isalnum(UCHAR_MAX) != isalnum(UCHAR_MAX)) success = false;
+    printf(" - \x1b[1;33mft_isalnum, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
+#endif
+
+#if FT_ISASCII_TEST == true
+    success = true;
+    printf("\n\x1b[1;33mStarting test for ft_isascii...\x1b[0m\n");
+    for (unsigned char c = 0; c < UCHAR_MAX; c++) {
+        if (ft_isascii(c) != isascii(c)) {
+            success = false;
+            break;
+        }
+    }
+    if (ft_isascii(UCHAR_MAX) != isascii(UCHAR_MAX)) success = false;
+    printf(" - \x1b[1;33mft_isascii, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
+#endif
+
+#if FT_ISPRINT_TEST == true
+    printf("\n\x1b[1;33mStarting test for ft_isprint...\x1b[0m\n");
+    for (unsigned char c = 0; c < UCHAR_MAX; c++) {
+        if (ft_isprint(c) != isprint(c)) {
+            success = false;
+            break;
+        }
+    }
+    if (ft_isprint(UCHAR_MAX) != isprint(UCHAR_MAX)) success = false;
+    printf(" - \x1b[1;33mft_isprint, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
+#endif
+
+#if FT_TOUPPER_TEST == true
+    success = true;
+    printf("\n\x1b[1;33mStarting test for ft_toupper...\x1b[0m\n");
+    for (unsigned char c = 0; c < UCHAR_MAX; c++) {
+        if (ft_toupper(c) != toupper(c)) {
+            success = false;
+            break;
+        }
+    }
+    if (ft_toupper(UCHAR_MAX) != toupper(UCHAR_MAX)) success = false;
+    printf(" - \x1b[1;33mft_toupper, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
+#endif
+
+#if FT_TOLOWER_TEST == true
+    success = true;
+    printf("\n\x1b[1;33mStarting test for ft_tolower...\x1b[0m\n");
+    for (unsigned char c = 0; c < UCHAR_MAX; c++) {
+        if (ft_tolower(c) != tolower(c)) {
+            success = false;
+            break;
+        }
+    }
+    if (ft_tolower(UCHAR_MAX) != tolower(UCHAR_MAX)) success = false;
+    printf(" - \x1b[1;33mft_tolower, status: \x1b[0m%s\n", success && success2 ? "\x1b[32mSUCCESS\x1b[0m" : "\x1b[31mFAIL\x1b[0m");
 #endif
 
 #if FT_PUTS_TEST == true

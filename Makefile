@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/25 14:34:35 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/25 17:24:32 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,10 @@ OBJDIR :=				./build/
 SRC_DIR :=				./src/
 
 #	Sources
-SRC +=					ft_bzero.asm ft_puts.asm ft_strcat.asm
-SRC +=					ft_strlen.asm
+SRC +=					ft_bzero.asm ft_isalpha.asm ft_isdigit.asm ft_puts.asm
+SRC +=					ft_isalnum.asm ft_isascii.asm ft_isprint.asm
+SRC +=					ft_tolower.asm ft_toupper.asm
+SRC +=					ft_strcat.asm ft_strlen.asm
 OBJECTS =				$(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
 SRCS +=					$(SRC)
 TESTMAIN :=				test.c
