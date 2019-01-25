@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/libfts.dir/test.c.o ../io/ft_puts.o ../mem/ft_bzero.o ../str/ft_strlen.o  -o libfts 
