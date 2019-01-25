@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/25 14:06:34 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/25 14:22:24 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,17 +23,12 @@ NAME :=					libfts.a
 #	Compiler
 CC :=					nasm
 FORMAT :=				-f elf64
-FLAGS :=				-Wall -Wextra -Werror
 
 ifeq ($(OS), Darwin)
 	THREADS := 			$(shell sysctl -n hw.ncpu)
 else
 	THREADS :=			4
 endif
-
-FAST :=					-j$(THREADS)
-HEADERS :=				-I ./include/
-O_FLAG :=				-O2
 
 #	Directories
 OBJDIR :=				./build/
@@ -56,7 +51,7 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	@ar rcs $@ $(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
 	@ranlib $@
-	@printf  "\033[92m\033[1:32mCompiling -------------> \033[91m$(NAME)\033[0m:\033[0m%-13s\033[32m[✔]\033[0m\n"
+	@printf "\033[92m\033[1;32mCompiling -------------> \033[91m$(NAME)\033[0m:\033[0m%-13s\033[32m[✔]\033[0m\n"
 
 $(OBJECTS): | $(OBJDIR)
 
@@ -64,20 +59,20 @@ $(OBJDIR):
 	@mkdir -p $@
 
 $(OBJDIR)%.o: %.asm
-	@printf  "\033[1:92mCompiling $(NAME)\033[0m %-28s\033[32m[$<]\033[0m\n" ""
+	@printf "\033[1;92mCompiling $(NAME)\033[0m %-28s\033[32m[$<]\033[0m\n"
 	@$(CC) $(FORMAT) $< -o $@
 	@printf "\033[A\033[2K"
 
 clean:
 	@/bin/rm -rf $(OBJDIR)
-	@printf  "\033[1:32mCleaning object files -> \033[91m$(NAME)\033[0m\033[1:32m:\033[0m%-13s\033[32m[✔]\033[0m\n"
+	@printf "\033[1;32mCleaning object files -> \033[91m$(NAME)\033[0m\033[1;32m:\033[0m%-13s\033[32m[✔]\033[0m\n"
 
 fast:
-	@$(MAKE) $(FAST)
+	@$(MAKE) --no-print-directory $(FAST)
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@printf  "\033[1:32mCleaning binary -------> \033[91m$(NAME)\033[0m\033[1:32m:\033[0m%-13s\033[32m[✔]\033[0m\n"
+	@printf "\033[1;32mCleaning binary -------> \033[91m$(NAME)\033[0m\033[1;32m:\033[0m%-13s\033[32m[✔]\033[0m\n"
 
 re: fclean fast
 
