@@ -2,12 +2,14 @@ SYS_READ    equ 0
 SYS_WRITE   equ 1
 
 section .bss
-    buffer  resb 0x1000 ;4096
+    buffer  resb 0x1000             ;4096
 
 section .text
     global  ft_cat
 
 ft_cat:
+    mov     r15, buffer
+    mov     byte[r15 + 0xfff], 0    ;set last byte of buffer at 0 in case file is larger than 4095 bytes
     mov     r15, rdi
 
 .loop:
@@ -23,7 +25,6 @@ ft_cat:
 
     mov     rdi, 1
     mov     rsi, buffer
-    mov     byte[rsi + rax + 1], 0
     mov     rdx, rax
     mov     rax, SYS_WRITE
     syscall                         ;print buffer
