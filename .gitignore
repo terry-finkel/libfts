@@ -7,3 +7,5 @@ CMakeFiles
 CMakeCache.txt
 CMakeLists.txt
 test
+cat.test
+ft_cat.test

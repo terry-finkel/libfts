@@ -1,9 +1,11 @@
 #include "libfts.h"
 #include <ctype.h>
+#include <fcntl.h>
 #include <limits.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 
@@ -21,6 +23,7 @@
 #define FT_MEMSET_TEST  true
 #define FT_MEMCPY_TEST  true
 #define FT_STRDUP_TEST  true
+#define FT_CAT_TEST     true
 
 
 const char      *__empty_string__ = "";
@@ -315,6 +318,65 @@ int     main(void) {
     const char *__ft_strdup__ = ft_strdup(__ft_strdup_str__);
     printf(" - Comparing strings...\n");
     success = !strcmp(__strdup__, __ft_strdup__) ? 1 : 0;
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+# undef TEST_STR
+#endif
+
+#if FT_CAT_TEST == true
+# define TEST_STR "ft_cat"
+    success = 1;
+    printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
+    printf(" - Please enter path to file you want to display:\n - File name: ");
+
+    //Get file path from user
+    char buffer[4096];
+    memset(buffer, 0, 4096);
+    (void)(scanf("%s", buffer) + 1);
+    const int fd = open(buffer, O_RDONLY);
+    if (fd == -1) {
+        printf(" - File was not found, aborting test...\n");
+        return EXIT_SUCCESS;
+    }
+
+    //Save STDOUT before redirection
+    dup2(1, 1010);
+
+    //Output cat into cat.test
+    pid_t id = fork();
+    if (id == 0) {
+        char *const argv[] = {"cat", buffer, NULL};
+        int output_fd = open("cat.test", O_WRONLY | O_CREAT | O_TRUNC, 0744);
+        dup2(output_fd, 1);
+        execve("/bin/cat", argv, NULL);
+        close(output_fd);
+    }
+    wait(&id);
+
+    //Uses ft_cat on file and output result in ft_cat.test
+    int output_fd = open("ft_cat.test", O_WRONLY | O_CREAT | O_TRUNC, 0744);
+    dup2(output_fd, 1);
+    ft_cat(fd);
+    close(output_fd);
+
+    //Read output in both files
+    int cat_fd = open("cat.test", O_RDONLY);
+    int ft_cat_fd = open("ft_cat.test", O_RDONLY);
+    char ft_buffer[4096];
+    memset(ft_buffer, 0, 4096);
+    ssize_t bytes;
+    while ((bytes = read(cat_fd, &buffer, 4096))) {
+        if (bytes == -1) return EXIT_FAILURE;
+
+        (void)(read(ft_cat_fd, &ft_buffer, (size_t)bytes) + 1);
+        if (strncmp(buffer, ft_buffer, (size_t)bytes) != 0) {
+            success = 0;
+            break;
+        }
+    }
+
+    //Restore STDOUT
+    dup2(1010, 1);
+
     printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR
 #endif
