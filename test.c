@@ -20,6 +20,7 @@
 #define FT_TOLOWER_TEST true
 #define FT_MEMSET_TEST  true
 #define FT_MEMCPY_TEST  true
+#define FT_STRDUP_TEST  true
 
 
 const char      *__empty_string__ = "";
@@ -30,6 +31,7 @@ const char      __ft_memset_char__ = 'Z';
 const char      *__ft_memset_str__ = "Salut je fais de l'assembleur et je suis trop fort!";
 const char      *__ft_strcat_str_1__ = "Le miel e";
 const char      *__ft_strcat_str_2__ = "t la foret!";
+const char      *__ft_strdup_str__ = "This string is going to be duplicated, hurray!";
 const char      *__ft_strlen_str__ = "TROP LONG LE STRING DE OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUFFFFFFFFFFFFFF";
 
 
@@ -300,6 +302,19 @@ int     main(void) {
     printf(" - Output using ft_memcpy: \"%s\"\n", __ft_memcpy__);
     printf(" - Comparing memory area...\n");
     success = !memcmp(__memcpy__, __ft_memcpy__, __ft_memcpy_src_len__) ? 1 : 0;
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+# undef TEST_STR
+#endif
+
+#if FT_STRDUP_TEST == true
+# define TEST_STR "ft_strdup"
+    printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
+    printf(" - Duping string with strdup...\n");
+    const char *__strdup__ = strdup(__ft_strdup_str__);
+    printf(" - Duping string with ft_strdup...\n");
+    const char *__ft_strdup__ = ft_strdup(__ft_strdup_str__);
+    printf(" - Comparing strings...\n");
+    success = !strcmp(__strdup__, __ft_strdup__) ? 1 : 0;
     printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR
 #endif

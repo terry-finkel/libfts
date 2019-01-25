@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/25 19:42:44 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/25 20:16:52 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ NAME :=					libfts.a
 CC :=					gcc
 NASM :=					nasm
 FORMAT :=				-f elf64
+FPIC :=					-fPIC
 VERSION :=				-std=c11
 
 ifeq ($(OS), Darwin)
@@ -44,8 +45,8 @@ SRC_DIR :=				./src/
 #	Sources
 SRC +=					ft_bzero.asm ft_isalpha.asm ft_isdigit.asm ft_puts.asm
 SRC +=					ft_isalnum.asm ft_isascii.asm ft_isprint.asm
-SRC +=					ft_tolower.asm ft_toupper.asm ft_strlen.asm
-SRC +=					ft_memset.asm ft_memcpy.asm ft_strcat.asm
+SRC +=					ft_tolower.asm ft_toupper.asm ft_strlen.asm ft_cat.asm
+SRC +=					ft_memset.asm ft_memcpy.asm ft_strcat.asm ft_strdup.asm
 OBJECTS =				$(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
 SRCS +=					$(SRC)
 TESTMAIN :=				test.c
