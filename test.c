@@ -1,7 +1,9 @@
-#include "libft.h"
+#include "libfts.h"
 #include <string.h>
 #include <stdio.h>
-
+#include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define FT_BZERO_TEST   true
 #define FT_STRCAT_TEST  true
