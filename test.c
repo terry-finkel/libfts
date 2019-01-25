@@ -14,7 +14,7 @@ const char      *__ft_strcat_str_1__ = "Le miel e";
 const char      *__ft_strcat_str_2__ = "t la foret!";
 
 
-int     main(int argc, char *argv[]) {
+int     main(void) {
 	bool 			success;
 	const size_t	__ft_bzero_str_len__ = strlen(__ft_bzero_str__),
 	                __ft_strcat_str_1_len__ = strlen(__ft_strcat_str_1__),

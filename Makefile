@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/25 14:22:24 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/25 14:34:35 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,21 @@ OS :=					$(shell uname)
 NAME :=					libfts.a
 
 #	Compiler
-CC :=					nasm
+CC :=					gcc
+NASM :=					nasm
 FORMAT :=				-f elf64
+VERSION :=				-std=c11
 
 ifeq ($(OS), Darwin)
 	THREADS := 			$(shell sysctl -n hw.ncpu)
 else
 	THREADS :=			4
 endif
+
+FAST :=					-j$(THREADS)
+FLAGS :=				-Wall -Wextra -Werror
+HEADERS :=				-I ./include/
+O_FLAG :=				-O2
 
 #	Directories
 OBJDIR :=				./build/
@@ -39,6 +46,7 @@ SRC +=					ft_bzero.asm ft_puts.asm ft_strcat.asm
 SRC +=					ft_strlen.asm
 OBJECTS =				$(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
 SRCS +=					$(SRC)
+TESTMAIN :=				test.c
 
 vpath %.asm $(SRC_DIR)
 
@@ -60,7 +68,7 @@ $(OBJDIR):
 
 $(OBJDIR)%.o: %.asm
 	@printf "\033[1;92mCompiling $(NAME)\033[0m %-28s\033[32m[$<]\033[0m\n"
-	@$(CC) $(FORMAT) $< -o $@
+	@$(NASM) $(FORMAT) $< -o $@
 	@printf "\033[A\033[2K"
 
 clean:
@@ -76,7 +84,11 @@ fclean: clean
 
 re: fclean fast
 
-.PHONY: all cat clean fast fclean re
+test: $(NAME)
+	@printf "\033[92m\033[1;32mCompiling -------------> \033[91mtest.c\033[0m:\033[0m%-15s\033[32m[✔]\033[0m\n"
+	@$(CC) $(TESTMAIN) $(FLAGS) $(O_FLAG) $(HEADERS) $(NAME) -o $@
+
+.PHONY: all cat clean fast fclean re test
 
 #################
 ##  WITH LOVE  ##
