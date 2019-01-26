@@ -23,28 +23,45 @@
 #define FT_MEMSET_TEST
 #define FT_MEMCPY_TEST
 #define FT_STRDUP_TEST
-//#define FT_CAT_TEST
+#define FT_CAT_TEST
+#define FT_ITOA_TEST
+#define FT_MEMCMP_TEST
 #define FT_STRCMP_TEST
 
+#ifndef MIN
+# define MIN(a, b) ({__typeof__(a)_a=(a);__typeof__(b)_b=(b);_a>_b ? _b : _a;})
+#endif
 
-const char      *__empty_string__ = "";
-const char 		*__ft_bzero_str__ = "Le caca c'est bien mais le miel c'est quand meme beaucoup mieux...";
-const char      *__ft_memcpy_dest__ = "Repeats a string instruction the number of times specified in the count register";
-const char      *__ft_memcpy_src__ = "((E)CX)";
+
+const char      *__empty_string__ = "",
+                *__ft_bzero_str__ = "Le miel c'est bien mais la foret c'est quand meme beaucoup mieux...",
+                *__ft_memcmp_str_1__ = "and x, y\ty ← x and y",
+                *__ft_memcmp_str_2__ = "and x, y\tx ← x and b",
+                *__ft_memcmp_str_3__ = "and x, y\tx ← x and y",
+                *__ft_memcpy_dest__ = "Repeats a string instruction the number of times specified in the count register",
+                *__ft_memcpy_src__ = "((E)CX)",
+                *__ft_memset_str__ = "Salut je fais de l'assembleur et je suis trop fort!",
+                *__ft_strcat_str_1__ = "Le miel e",
+                *__ft_strcat_str_2__ = "t la foret!",
+                *__ft_strcmp_str__ = "We won’t get too fancy",
+                *__ft_strcmp_str_2__ = "We won’t get too fancy",
+                *__ft_strdup_str__ = "This string is going to be duplicated, hurray!",
+                *__ft_strlen_str__ = "TROP LONG LE STRING DE OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUFFFFFFFFFFFFFF";
 const char      __ft_memset_char__ = 'Z';
-const char      *__ft_memset_str__ = "Salut je fais de l'assembleur et je suis trop fort!";
-const char      *__ft_strcat_str_1__ = "Le miel e";
-const char      *__ft_strcat_str_2__ = "t la foret!";
-const char      *__ft_strcmp_str__ = "We won’t get too fancy";
-const char      *__ft_strcmp_str_2__ = "We won’t get too fancy";
-const char      *__ft_strdup_str__ = "This string is going to be duplicated, hurray!";
-const char      *__ft_strlen_str__ = "TROP LONG LE STRING DE OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUFFFFFFFFFFFFFF";
+const int       ft_itoa_1 = 42,
+                ft_itoa_2 = -101010,
+                ft_itoa_3 = 0,
+                ft_itoa_4 = INT_MAX,
+                ft_itoa_5 = INT_MIN;
 
 
 int     main(void) {
     int 			success, success2, ret_value, ft_ret_value;
     size_t          st_ret_value, ft_st_ret_value;
     const size_t	__ft_bzero_str_len__ = strlen(__ft_bzero_str__),
+                    __ft_memcmp_len_1__ = MIN(strlen(__ft_memcmp_str_1__), strlen(__ft_memcmp_str_2__)),
+                    __ft_memcmp_len_2__ = MIN(strlen(__ft_memcmp_str_2__), strlen(__ft_memcmp_str_3__)),
+                    __ft_memcmp_len_3__ = MIN(strlen(__ft_memcmp_str_3__), strlen(__ft_memcmp_str_1__)),
                     __ft_memcpy_dest_len__ = strlen(__ft_memcpy_dest__),
                     __ft_memcpy_src_len__ = strlen(__ft_memcpy_src__),
 	                __ft_memset_str_len__ = strlen(__ft_memset_str__),
@@ -304,6 +321,7 @@ int     main(void) {
     snprintf(__ft_memcpy__, __ft_memcpy_dest_len__ + 1, "%s", __ft_memcpy_dest__);
     printf(" - Destination memory area reads: \"%s\"\n", __ft_memcpy_dest__);
     printf(" - Source memory area reads: \"%s\"\n", __ft_memcpy_src__);
+    printf(" - \x1b[1;33mTEST1: Copy non-null string\x1b[0m\n");
     printf(" - Copying using memcpy...\n");
     memcpy(__memcpy__, __ft_memcpy_src__, __ft_memcpy_src_len__);
     printf(" - Output using memcpy: \"%s\"\n", __memcpy__);
@@ -312,7 +330,18 @@ int     main(void) {
     printf(" - Output using ft_memcpy: \"%s\"\n", __ft_memcpy__);
     printf(" - Comparing memory area...\n");
     success = !memcmp(__memcpy__, __ft_memcpy__, __ft_memcpy_src_len__) ? 1 : 0;
-    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    printf(" - \x1b[1;33mTEST1: \x1b[0m%s\x1b[0m\n", success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    printf(" - \x1b[1;33mTEST2: Copy 0 characters\x1b[0m\n");
+    printf(" - Copying using memcpy...\n");
+    memcpy(__memcpy__, __ft_memcpy_src__, 0);
+    printf(" - Output using memcpy: \"%s\"\n", __memcpy__);
+    printf(" - Copying using ft_memcpy...\n");
+    ft_memcpy(__ft_memcpy__, __ft_memcpy_src__, 0);
+    printf(" - Output using ft_memcpy: \"%s\"\n", __ft_memcpy__);
+    printf(" - Comparing memory area...\n");
+    success2 = !memcmp(__memcpy__, __ft_memcpy__, __ft_memcpy_src_len__) ? 1 : 0;
+    printf(" - \x1b[1;33mTEST2: \x1b[0m%s\x1b[0m\n", success2 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR
 #endif
 
@@ -393,12 +422,57 @@ int     main(void) {
     printf("         BONUS PART TESTS\n");
     printf("-----------------------------------\x1b[0m\n");
 
+#ifdef FT_ITOA_TEST
+# define TEST_STR "ft_itoa"
+    printf("\n\x1b[1;33mStarting tests for %s...\x1b[0m\n", TEST_STR);
+    char itoa_ret[32];
+    sprintf(itoa_ret, "%d", ft_itoa_1);
+    char *ft_itoa_ret = ft_itoa(ft_itoa_1);
+    success = !strcmp(itoa_ret, ft_itoa_ret);
+    free(ft_itoa_ret);
+    sprintf(itoa_ret, "%d", ft_itoa_2);
+    ft_itoa_ret = ft_itoa(ft_itoa_2);
+    success2 = !strcmp(itoa_ret, ft_itoa_ret);
+    free(ft_itoa_ret);
+    sprintf(itoa_ret, "%d", ft_itoa_3);
+    ft_itoa_ret = ft_itoa(ft_itoa_3);
+    int success3 = !strcmp(itoa_ret, ft_itoa_ret);
+    free(ft_itoa_ret);
+    sprintf(itoa_ret, "%d", ft_itoa_4);
+    ft_itoa_ret = ft_itoa(ft_itoa_4);
+    int success4 = !strcmp(itoa_ret, ft_itoa_ret);
+    free(ft_itoa_ret);
+    sprintf(itoa_ret, "%d", ft_itoa_5);
+    ft_itoa_ret = ft_itoa(ft_itoa_5);
+    int success5 = !strcmp(itoa_ret, ft_itoa_ret);
+    free(ft_itoa_ret);
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 && success4 && success5 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+# undef TEST_STR
+#endif
+
+#ifdef FT_MEMCMP_TEST
+# define TEST_STR "ft_memcmp"
+    printf("\n\x1b[1;33mStarting tests for %s...\x1b[0m\n", TEST_STR);
+    success = memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_2__, __ft_memcmp_len_1__)
+              == ft_memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_2__, __ft_memcmp_len_1__) ? 1 : 0;
+    success2 = memcmp(__ft_memcmp_str_2__, __ft_memcmp_str_3__, __ft_memcmp_len_2__)
+               == ft_memcmp(__ft_memcmp_str_2__, __ft_memcmp_str_3__, __ft_memcmp_len_2__) ? 1 : 0;
+    success3 = memcmp(__ft_memcmp_str_3__, __ft_memcmp_str_1__, __ft_memcmp_len_3__)
+               == ft_memcmp(__ft_memcmp_str_3__, __ft_memcmp_str_1__, __ft_memcmp_len_3__) ? 1 : 0;
+    success4 = memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_1__, __ft_memcmp_len_1__)
+                   == ft_memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_1__, __ft_memcmp_len_1__) ? 1 : 0;
+    success5 = memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_1__, 0)
+                   == ft_memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_1__, 0) ? 1 : 0;
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 && success4 && success5 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+# undef TEST_STR
+#endif
+
 #ifdef FT_STRCMP_TEST
 # define TEST_STR "ft_strcmp"
-    printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
+    printf("\n\x1b[1;33mStarting tests for %s...\x1b[0m\n", TEST_STR);
     success = strcmp(__ft_strcmp_str__, __ft_strcmp_str_2__) == ft_strcmp(__ft_strcmp_str__, __ft_strcmp_str_2__) ? 1 : 0;
     success2 = strcmp(__ft_strcmp_str__, __ft_strdup_str__) == ft_strcmp(__ft_strcmp_str__, __ft_strdup_str__) ? 1 : 0;
-    int success3 = strcmp(__ft_memcpy_src__, __ft_memcpy_dest__) == ft_strcmp(__ft_memcpy_src__, __ft_memcpy_dest__) ? 1 : 0;
+    success3 = strcmp(__ft_memcpy_src__, __ft_memcpy_dest__) == ft_strcmp(__ft_memcpy_src__, __ft_memcpy_dest__) ? 1 : 0;
     printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR
 #endif

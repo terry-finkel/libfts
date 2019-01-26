@@ -1,16 +1,17 @@
 section .text
-    global  ft_strcmp
+    global  ft_memcmp
 
-ft_strcmp:
+ft_memcmp:
     xor     rax, rax
 
 .loop:
+    cmp     rdx, 0
+    jz      .end
+
     cmpsb
     jne     .diff
 
-    cmp     byte[rdi - 1], 0
-    jz      .end
-
+    dec     rdx
     jmp     .loop
 
 .diff:
