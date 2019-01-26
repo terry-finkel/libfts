@@ -9,21 +9,22 @@
 #include <unistd.h>
 
 
-#define FT_BZERO_TEST   true
-#define FT_STRCAT_TEST  true
-#define FT_ISALPHA_TEST true
-#define FT_ISDIGIT_TEST true
-#define FT_ISALNUM_TEST true
-#define FT_ISASCII_TEST true
-#define FT_ISPRINT_TEST true
-#define FT_PUTS_TEST    true
-#define FT_STRLEN_TEST  true
-#define FT_TOUPPER_TEST true
-#define FT_TOLOWER_TEST true
-#define FT_MEMSET_TEST  true
-#define FT_MEMCPY_TEST  true
-#define FT_STRDUP_TEST  true
-#define FT_CAT_TEST     true
+#define FT_BZERO_TEST
+#define FT_STRCAT_TEST
+#define FT_ISALPHA_TEST
+#define FT_ISDIGIT_TEST
+#define FT_ISALNUM_TEST
+#define FT_ISASCII_TEST
+#define FT_ISPRINT_TEST
+#define FT_PUTS_TEST
+#define FT_STRLEN_TEST
+#define FT_TOUPPER_TEST
+#define FT_TOLOWER_TEST
+#define FT_MEMSET_TEST
+#define FT_MEMCPY_TEST
+#define FT_STRDUP_TEST
+//#define FT_CAT_TEST
+#define FT_STRCMP_TEST
 
 
 const char      *__empty_string__ = "";
@@ -34,6 +35,8 @@ const char      __ft_memset_char__ = 'Z';
 const char      *__ft_memset_str__ = "Salut je fais de l'assembleur et je suis trop fort!";
 const char      *__ft_strcat_str_1__ = "Le miel e";
 const char      *__ft_strcat_str_2__ = "t la foret!";
+const char      *__ft_strcmp_str__ = "We won’t get too fancy";
+const char      *__ft_strcmp_str_2__ = "We won’t get too fancy";
 const char      *__ft_strdup_str__ = "This string is going to be duplicated, hurray!";
 const char      *__ft_strlen_str__ = "TROP LONG LE STRING DE OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUFFFFFFFFFFFFFF";
 
@@ -56,9 +59,13 @@ int     main(void) {
 	     			*__ft_strcat__ = (char *)malloc(sizeof(char) * __ft_strcat_str_1_len__ + __ft_strcat_str_2_len__ + 1),
                     *__strcat__ = (char *)malloc(sizeof(char) * __ft_strcat_str_1_len__ + __ft_strcat_str_2_len__ + 1);
 
-#if FT_BZERO_TEST == true
+	printf("\x1b[32m-----------------------------------\n");
+	printf("       MANDATORY PART TESTS\n");
+    printf("-----------------------------------\x1b[0m\n");
+
+#ifdef FT_BZERO_TEST
 # define TEST_STR "ft_bzero"
-    printf("\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
+    printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
 	printf(" - Buffering test strings in memory...\n");
     snprintf(__bzero__, __ft_bzero_str_len__ + 1, "%s", __ft_bzero_str__);
     snprintf(__ft_bzero__, __ft_bzero_str_len__ + 1, "%s", __ft_bzero_str__);
@@ -72,7 +79,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_STRCAT_TEST == true
+#ifdef FT_STRCAT_TEST
 # define TEST_STR "ft_strcat"
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
     printf(" - \x1b[1;33mTEST1: User defined string\x1b[0m\n");
@@ -107,7 +114,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_ISALPHA_TEST == true
+#ifdef FT_ISALPHA_TEST
 # define TEST_STR "ft_isalpha"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -122,7 +129,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_ISDIGIT_TEST == true
+#ifdef FT_ISDIGIT_TEST
 # define TEST_STR "ft_isdigit"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -137,7 +144,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_ISALNUM_TEST == true
+#ifdef FT_ISALNUM_TEST
 # define TEST_STR "ft_isalnum"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -152,7 +159,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_ISASCII_TEST == true
+#ifdef FT_ISASCII_TEST
 # define TEST_STR "ft_isascii"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -167,7 +174,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_ISPRINT_TEST == true
+#ifdef FT_ISPRINT_TEST
 # define TEST_STR "ft_isprint"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -182,7 +189,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_TOUPPER_TEST == true
+#ifdef FT_TOUPPER_TEST
 # define TEST_STR "ft_toupper"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -197,7 +204,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_TOLOWER_TEST == true
+#ifdef FT_TOLOWER_TEST
 # define TEST_STR "ft_tolower"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -212,7 +219,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_PUTS_TEST == true
+#ifdef FT_PUTS_TEST
 # define TEST_STR "ft_puts"
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
     snprintf(__ft_bzero__, __ft_bzero_str_len__ + 1, "%s", __ft_bzero_str__);
@@ -238,7 +245,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_STRLEN_TEST == true
+#ifdef FT_STRLEN_TEST
 # define TEST_STR "ft_strlen"
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
     printf(" - \x1b[1;33mTEST1: User defined string\x1b[0m\n");
@@ -261,7 +268,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_MEMSET_TEST == true
+#ifdef FT_MEMSET_TEST
 # define TEST_STR "ft_memset"
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
     printf("- Buffering test strings in memory...\n");
@@ -289,7 +296,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_MEMCPY_TEST == true
+#ifdef FT_MEMCPY_TEST
 # define TEST_STR "ft_memcpy"
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
     printf(" - Buffering test strings in memory...\n");
@@ -309,7 +316,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_STRDUP_TEST == true
+#ifdef FT_STRDUP_TEST
 # define TEST_STR "ft_strdup"
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
     printf(" - Duping string with strdup...\n");
@@ -322,7 +329,7 @@ int     main(void) {
 # undef TEST_STR
 #endif
 
-#if FT_CAT_TEST == true
+#ifdef FT_CAT_TEST
 # define TEST_STR "ft_cat"
     success = 1;
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
@@ -334,8 +341,8 @@ int     main(void) {
     (void)(scanf("%s", buffer) + 1);
     const int fd = open(buffer, O_RDONLY);
     if (fd == -1) {
-        printf(" - File was not found, aborting test...\n");
-        return EXIT_SUCCESS;
+        printf(" - File was not found, aborting %s test...\n", TEST_STR);
+        goto FT_CAT_TEST_END;
     }
 
     //Save STDOUT before redirection
@@ -378,6 +385,21 @@ int     main(void) {
     dup2(1010, 1);
 
     printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    FT_CAT_TEST_END: ;
+# undef TEST_STR
+#endif
+
+    printf("\n\x1b[32m-----------------------------------\n");
+    printf("         BONUS PART TESTS\n");
+    printf("-----------------------------------\x1b[0m\n");
+
+#ifdef FT_STRCMP_TEST
+# define TEST_STR "ft_strcmp"
+    printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
+    success = strcmp(__ft_strcmp_str__, __ft_strcmp_str_2__) == ft_strcmp(__ft_strcmp_str__, __ft_strcmp_str_2__) ? 1 : 0;
+    success2 = strcmp(__ft_strcmp_str__, __ft_strdup_str__) == ft_strcmp(__ft_strcmp_str__, __ft_strdup_str__) ? 1 : 0;
+    int success3 = strcmp(__ft_memcpy_src__, __ft_memcpy_dest__) == ft_strcmp(__ft_memcpy_src__, __ft_memcpy_dest__) ? 1 : 0;
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR
 #endif
 
