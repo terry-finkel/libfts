@@ -27,7 +27,7 @@ ft_itoa:
 .divide:
     xor     edx, edx
     div     ebx
-    add     edx, 48                      ;convert int to char
+    add     edx, 48                     ;convert int to char
     push    rdx
     inc     rcx
     cmp     eax, 0
