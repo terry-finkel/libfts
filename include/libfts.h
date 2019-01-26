@@ -3,6 +3,7 @@
 
 # include <stddef.h>
 
+int         ft_abs(int i);
 void        ft_bzero(void *s, size_t n);
 void        ft_cat(const int fd);
 int         ft_isalnum(int c);

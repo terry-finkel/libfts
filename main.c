@@ -8,7 +8,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-
 #define FT_BZERO_TEST
 #define FT_STRCAT_TEST
 #define FT_ISALPHA_TEST
@@ -24,9 +23,14 @@
 #define FT_MEMCPY_TEST
 #define FT_STRDUP_TEST
 #define FT_CAT_TEST
+#define FT_ABS_TEST
 #define FT_ITOA_TEST
 #define FT_MEMCMP_TEST
 #define FT_STRCMP_TEST
+
+# ifndef ABS
+#  define ABS(x) ({__typeof__(x) _x = (x);_x < 0 ? -_x : _x;})
+# endif
 
 #ifndef MIN
 # define MIN(a, b) ({__typeof__(a)_a=(a);__typeof__(b)_b=(b);_a>_b ? _b : _a;})
@@ -48,11 +52,7 @@ const char      *__empty_string__ = "",
                 *__ft_strdup_str__ = "This string is going to be duplicated, hurray!",
                 *__ft_strlen_str__ = "TROP LONG LE STRING DE OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUFFFFFFFFFFFFFF";
 const char      __ft_memset_char__ = 'Z';
-const int       ft_itoa_1 = 42,
-                ft_itoa_2 = -101010,
-                ft_itoa_3 = 0,
-                ft_itoa_4 = INT_MAX,
-                ft_itoa_5 = INT_MIN;
+const int       num_1 = 42, num_2 = -101010, num_3 = 0, num_4 = INT_MAX, num_5 = INT_MIN;
 
 
 int     main(void) {
@@ -422,28 +422,40 @@ int     main(void) {
     printf("         BONUS PART TESTS\n");
     printf("-----------------------------------\x1b[0m\n");
 
+#ifdef FT_ABS_TEST
+# define TEST_STR "ft_abs"
+    printf("\n\x1b[1;33mStarting tests for %s...\x1b[0m\n", TEST_STR);
+    success = ft_abs(num_1) == ABS(num_1) ? 1 : 0;
+    success2 = ft_abs(num_2) == ABS(num_2) ? 1 : 0;
+    success3 = ft_abs(num_3) == ABS(num_3) ? 1 : 0;
+    success4 = ft_abs(num_4) == ABS(num_4) ? 1 : 0;
+    success5 = ft_abs(num_5 + 1) == ABS(num_5 + 1) ? 1 : 0;
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 && success4 && success5 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+# undef TEST_STR
+#endif
+
 #ifdef FT_ITOA_TEST
 # define TEST_STR "ft_itoa"
     printf("\n\x1b[1;33mStarting tests for %s...\x1b[0m\n", TEST_STR);
     char itoa_ret[32];
-    sprintf(itoa_ret, "%d", ft_itoa_1);
-    char *ft_itoa_ret = ft_itoa(ft_itoa_1);
+    sprintf(itoa_ret, "%d", num_1);
+    char *ft_itoa_ret = ft_itoa(num_1);
     success = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
-    sprintf(itoa_ret, "%d", ft_itoa_2);
-    ft_itoa_ret = ft_itoa(ft_itoa_2);
+    sprintf(itoa_ret, "%d", num_2);
+    ft_itoa_ret = ft_itoa(num_2);
     success2 = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
-    sprintf(itoa_ret, "%d", ft_itoa_3);
-    ft_itoa_ret = ft_itoa(ft_itoa_3);
+    sprintf(itoa_ret, "%d", num_3);
+    ft_itoa_ret = ft_itoa(num_3);
     success3 = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
-    sprintf(itoa_ret, "%d", ft_itoa_4);
-    ft_itoa_ret = ft_itoa(ft_itoa_4);
+    sprintf(itoa_ret, "%d", num_4);
+    ft_itoa_ret = ft_itoa(num_4);
     success4 = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
-    sprintf(itoa_ret, "%d", ft_itoa_5);
-    ft_itoa_ret = ft_itoa(ft_itoa_5);
+    sprintf(itoa_ret, "%d", num_5);
+    ft_itoa_ret = ft_itoa(num_5);
     success5 = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
     printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 && success4 && success5 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
