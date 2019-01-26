@@ -26,6 +26,7 @@
 #define FT_ABS_TEST
 #define FT_ITOA_TEST
 #define FT_MEMCMP_TEST
+#define FT_MEMMOVE_TEST
 #define FT_STRCMP_TEST
 
 # ifndef ABS
@@ -44,6 +45,7 @@ const char      *__empty_string__ = "",
                 *__ft_memcmp_str_3__ = "and x, y\tx ← x and y",
                 *__ft_memcpy_dest__ = "Repeats a string instruction the number of times specified in the count register",
                 *__ft_memcpy_src__ = "((E)CX)",
+                *__ft_memmove_str__ = "Convert Word to Doubleword/Convert Doubleword to Quadword",
                 *__ft_memset_str__ = "Salut je fais de l'assembleur et je suis trop fort!",
                 *__ft_strcat_str_1__ = "Le miel e",
                 *__ft_strcat_str_2__ = "t la foret!",
@@ -52,7 +54,7 @@ const char      *__empty_string__ = "",
                 *__ft_strdup_str__ = "This string is going to be duplicated, hurray!",
                 *__ft_strlen_str__ = "TROP LONG LE STRING DE OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUFFFFFFFFFFFFFF";
 const char      __ft_memset_char__ = 'Z';
-const int       num_1 = 42, num_2 = -101010, num_3 = 0, num_4 = INT_MAX, num_5 = INT_MIN;
+const int       num_1 = 42, num_2 = -101010, num_3 = 0, num_4 = INT_MAX, num_5 = INT_MIN, MEMMOVE_OFFSET = 3;
 
 
 int     main(void) {
@@ -64,19 +66,24 @@ int     main(void) {
                     __ft_memcmp_len_3__ = MIN(strlen(__ft_memcmp_str_3__), strlen(__ft_memcmp_str_1__)),
                     __ft_memcpy_dest_len__ = strlen(__ft_memcpy_dest__),
                     __ft_memcpy_src_len__ = strlen(__ft_memcpy_src__),
+                    __ft_memmove_str_len__ = strlen(__ft_memmove_str__),
 	                __ft_memset_str_len__ = strlen(__ft_memset_str__),
 	                __ft_strcat_str_1_len__ = strlen(__ft_strcat_str_1__),
 	                __ft_strcat_str_2_len__ = strlen(__ft_strcat_str_2__);
-	char 		    *__bzero__ = (char *)malloc(sizeof(char) * __ft_bzero_str_len__ + 1),
+    char 		    *__bzero__ = (char *)malloc(sizeof(char) * __ft_bzero_str_len__ + 1),
 	                *__ft_bzero__ = (char *)malloc(sizeof(char) * __ft_bzero_str_len__ + 1),
 	                *__memcpy__ = (char *)malloc(sizeof(char) * __ft_memcpy_dest_len__ + 1),
 	                *__ft_memcpy__ = (char *)malloc(sizeof(char) * __ft_memcpy_dest_len__ + 1),
+	                *__memmove_src__ = (char *)malloc(sizeof(char) * __ft_memmove_str_len__ + 1),
+	                *__ft_memmove_src__ = (char *)malloc(sizeof(char) * __ft_memmove_str_len__ + 1),
 	                *__ft_memset__ = (char *)malloc(sizeof(char) * __ft_memset_str_len__ + 1),
 	                *__memset__ = (char *)malloc(sizeof(char) * __ft_memset_str_len__ + 1),
 	     			*__ft_strcat__ = (char *)malloc(sizeof(char) * __ft_strcat_str_1_len__ + __ft_strcat_str_2_len__ + 1),
                     *__strcat__ = (char *)malloc(sizeof(char) * __ft_strcat_str_1_len__ + __ft_strcat_str_2_len__ + 1);
+    void            *__ft_memmove_dest__ = __ft_memmove_src__ + MEMMOVE_OFFSET,
+                    *__memmove_dest__ = __memmove_src__ + MEMMOVE_OFFSET;
 
-	printf("\x1b[32m-----------------------------------\n");
+    printf("\x1b[32m-----------------------------------\n");
 	printf("       MANDATORY PART TESTS\n");
     printf("-----------------------------------\x1b[0m\n");
 
@@ -332,6 +339,9 @@ int     main(void) {
     success = !memcmp(__memcpy__, __ft_memcpy__, __ft_memcpy_src_len__) ? 1 : 0;
     printf(" - \x1b[1;33mTEST1: \x1b[0m%s\x1b[0m\n", success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
     printf(" - \x1b[1;33mTEST2: Copy 0 characters\x1b[0m\n");
+    printf(" - Buffering test strings in memory...\n");
+    snprintf(__memcpy__, __ft_memcpy_dest_len__ + 1, "%s", __ft_memcpy_dest__);
+    snprintf(__ft_memcpy__, __ft_memcpy_dest_len__ + 1, "%s", __ft_memcpy_dest__);
     printf(" - Copying using memcpy...\n");
     memcpy(__memcpy__, __ft_memcpy_src__, 0);
     printf(" - Output using memcpy: \"%s\"\n", __memcpy__);
@@ -476,6 +486,41 @@ int     main(void) {
     success5 = memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_1__, 0)
                    == ft_memcmp(__ft_memcmp_str_1__, __ft_memcmp_str_1__, 0) ? 1 : 0;
     printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 && success4 && success5 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+# undef TEST_STR
+#endif
+
+#ifdef FT_MEMMOVE_TEST
+# define TEST_STR "ft_memmove"
+    printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
+    printf(" - Buffering test strings in memory...\n");
+    snprintf(__memmove_src__, __ft_memmove_str_len__ + 1, "%s", __ft_memmove_str__);
+    snprintf(__ft_memmove_src__, __ft_memmove_str_len__ + 1, "%s", __ft_memmove_str__);
+    printf(" - Destination memory area reads: \"%s\"\n", (char *)__memmove_dest__);
+    printf(" - Source memory area reads: \"%s\"\n", __memmove_src__);
+    printf(" - \x1b[1;33mTEST1: Copy non-null string\x1b[0m\n");
+    printf(" - Copying using memmove...\n");
+    memmove(__memmove_dest__, __memmove_src__, __ft_memmove_str_len__ - MEMMOVE_OFFSET);
+    printf(" - Output using memmove: \"%s\"\n", (char *)__memmove_dest__);
+    printf(" - Copying using ft_memmove...\n");
+    ft_memmove(__ft_memmove_dest__, __ft_memmove_src__, __ft_memmove_str_len__ - MEMMOVE_OFFSET);
+    printf(" - Output using ft_memmove: \"%s\"\n", (char *)__ft_memmove_dest__);
+    printf(" - Comparing memory area...\n");
+    success = !memcmp(__memmove_dest__, __ft_memmove_dest__, __ft_memmove_str_len__ - MEMMOVE_OFFSET) ? 1 : 0;
+    printf(" - \x1b[1;33mTEST1: \x1b[0m%s\x1b[0m\n", success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    printf(" - \x1b[1;33mTEST2: Copy 0 characters\x1b[0m\n");
+    printf(" - Buffering test strings in memory...\n");
+    snprintf(__memmove_src__, __ft_memmove_str_len__ + 1, "%s", __ft_memmove_str__);
+    snprintf(__ft_memmove_src__, __ft_memmove_str_len__ + 1, "%s", __ft_memmove_str__);
+    printf(" - Copying using memmove...\n");
+    memmove(__memmove_dest__, __memmove_src__, 0);
+    printf(" - Output using memmove: \"%s\"\n", (char *)__memmove_dest__);
+    printf(" - Copying using ft_memmove...\n");
+    ft_memmove(__ft_memmove_dest__, __ft_memmove_src__, 0);
+    printf(" - Output using ft_memmove: \"%s\"\n", (char *)__ft_memmove_dest__);
+    printf(" - Comparing memory area...\n");
+    success2 = !memcmp(__memmove_dest__, __ft_memmove_dest__, __ft_memmove_str_len__ - MEMMOVE_OFFSET) ? 1 : 0;
+    printf(" - \x1b[1;33mTEST2: \x1b[0m%s\x1b[0m\n", success2 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR
 #endif
 

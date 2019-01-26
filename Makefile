@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/26 20:08:50 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/26 22:11:25 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_DIR :=				./src/
 
 #	Sources
 BONUS +=				ft_abs.asm ft_itoa.asm ft_memcmp.asm ft_strcmp.asm
+BONUS +=				ft_memmove.asm
 SRC +=					ft_bzero.asm ft_isalpha.asm ft_isdigit.asm ft_puts.asm
 SRC +=					ft_isalnum.asm ft_isascii.asm ft_isprint.asm
 SRC +=					ft_tolower.asm ft_toupper.asm ft_strlen.asm ft_cat.asm
