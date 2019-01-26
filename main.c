@@ -1,4 +1,4 @@
-#include "libfts.h"
+#include "include/libfts.h"
 #include <ctype.h>
 #include <fcntl.h>
 #include <limits.h>

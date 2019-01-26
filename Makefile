@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/25 20:16:52 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/26 12:35:19 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,22 +35,28 @@ endif
 
 FAST :=					-j$(THREADS)
 FLAGS :=				-Wall -Wextra -Werror
-HEADERS :=				-I ./include/
 O_FLAG :=				-O2
 
 #	Directories
 OBJDIR :=				./build/
+BONUS_DIR :=			./bonus/
 SRC_DIR :=				./src/
 
 #	Sources
+BONUS +=				
 SRC +=					ft_bzero.asm ft_isalpha.asm ft_isdigit.asm ft_puts.asm
 SRC +=					ft_isalnum.asm ft_isascii.asm ft_isprint.asm
 SRC +=					ft_tolower.asm ft_toupper.asm ft_strlen.asm ft_cat.asm
 SRC +=					ft_memset.asm ft_memcpy.asm ft_strcat.asm ft_strdup.asm
-OBJECTS =				$(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
-SRCS +=					$(SRC)
-TESTMAIN :=				test.c
 
+OBJECTS =				$(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
+
+SRCS +=					$(BONUS)
+SRCS +=					$(SRC)
+
+TESTMAIN :=				main.c
+
+vpath %.asm $(BONUS_DIR)
 vpath %.asm $(SRC_DIR)
 
 #################
@@ -89,7 +95,7 @@ re: fclean fast
 
 test: $(NAME)
 	@printf "\033[92m\033[1;32mCompiling -------------> \033[91mtest.c\033[0m:\033[0m%-15s\033[32m[✔]\033[0m\n"
-	@$(CC) $(TESTMAIN) $(FLAGS) $(O_FLAG) $(HEADERS) $(NAME) -o $@
+	@$(CC) $(TESTMAIN) $(FLAGS) $(O_FLAG) $(NAME) -o $@
 
 .PHONY: all cat clean fast fclean re test
 
