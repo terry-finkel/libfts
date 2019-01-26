@@ -56,7 +56,7 @@ const int       ft_itoa_1 = 42,
 
 
 int     main(void) {
-    int 			success, success2, ret_value, ft_ret_value;
+    int 			success, success2, success3, success4, success5, ret_value, ft_ret_value;
     size_t          st_ret_value, ft_st_ret_value;
     const size_t	__ft_bzero_str_len__ = strlen(__ft_bzero_str__),
                     __ft_memcmp_len_1__ = MIN(strlen(__ft_memcmp_str_1__), strlen(__ft_memcmp_str_2__)),
@@ -436,15 +436,15 @@ int     main(void) {
     free(ft_itoa_ret);
     sprintf(itoa_ret, "%d", ft_itoa_3);
     ft_itoa_ret = ft_itoa(ft_itoa_3);
-    int success3 = !strcmp(itoa_ret, ft_itoa_ret);
+    success3 = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
     sprintf(itoa_ret, "%d", ft_itoa_4);
     ft_itoa_ret = ft_itoa(ft_itoa_4);
-    int success4 = !strcmp(itoa_ret, ft_itoa_ret);
+    success4 = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
     sprintf(itoa_ret, "%d", ft_itoa_5);
     ft_itoa_ret = ft_itoa(ft_itoa_5);
-    int success5 = !strcmp(itoa_ret, ft_itoa_ret);
+    success5 = !strcmp(itoa_ret, ft_itoa_ret);
     free(ft_itoa_ret);
     printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 && success4 && success5 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR

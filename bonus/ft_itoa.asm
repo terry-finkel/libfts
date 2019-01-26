@@ -17,7 +17,7 @@ ft_itoa:
     mov     ebx, 10
 
 .check_negative:
-    and     rdi, 0x80000000
+    and     edi, 0x80000000
     mov     rdi, buffer
     jz      .divide                     ;number is positive, proceed to main loop
     not     eax                         ;else
