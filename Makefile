@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/26 22:34:37 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/27 17:39:41 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,15 +22,21 @@ NAME :=					libfts.a
 
 #	Compiler
 CC :=					gcc
-NASM :=					nasm
-FORMAT :=				-f elf64
 FPIC :=					-fPIC
 VERSION :=				-std=c11
 
 ifeq ($(OS), Darwin)
 	THREADS := 			$(shell sysctl -n hw.ncpu)
+	FORMAT :=			-f macho64
+	NASM :=				nasm64
+	BONUS_DIR :=		./bonus_macho64/
+	SRC_DIR :=			./src_macho64/
 else
 	THREADS :=			4
+	FORMAT :=			-f elf64
+	NASM :=				nasm
+	BONUS_DIR :=		./bonus_elf64/
+	SRC_DIR :=			./src_elf64/
 endif
 
 FAST :=					-j$(THREADS)
@@ -39,12 +45,9 @@ O_FLAG :=				-O2
 
 #	Directories
 OBJDIR :=				./build/
-BONUS_DIR :=			./bonus/
-SRC_DIR :=				./src/
 
 #	Sources
-BONUS +=				ft_abs.asm ft_itoa.asm ft_memcmp.asm ft_strcmp.asm
-BONUS +=				ft_memmove.asm
+BONUS +=				ft_abs.asm ft_itoa.asm ft_memcmp.asm ft_strcmp.asm ft_memmove.asm
 SRC +=					ft_bzero.asm ft_isalpha.asm ft_isdigit.asm ft_puts.asm
 SRC +=					ft_isalnum.asm ft_isascii.asm ft_isprint.asm
 SRC +=					ft_tolower.asm ft_toupper.asm ft_strlen.asm ft_cat.asm
@@ -91,6 +94,10 @@ fast:
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@printf "\033[1;32mCleaning binary -------> \033[91m$(NAME)\033[0m\033[1;32m:\033[0m%-13s\033[32m[✔]\033[0m\n"
+
+partialtest: $(NAME)
+	@printf "\033[92m\033[1;32mCompiling -------------> \033[91mtest.c\033[0m:\033[0m%-15s\033[32m[✔]\033[0m\n"
+	@$(CC) $(TESTMAIN) $(FLAGS) -Wno-unused-variable $(O_FLAG) $(NAME) -o test
 
 purge: fclean
 	@/bin/rm -f test cat.test ft_cat.test

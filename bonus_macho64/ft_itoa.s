@@ -1,15 +1,16 @@
+default rel
+
 section .data
     buffer  times 11 db 0
 
-    nega db "neg",0
-    posi db "pos",0
-
 section .text
-    global  ft_itoa
-    extern  ft_strdup
-    extern  malloc
+    global  _ft_itoa
+    extern  _ft_strdup
 
-ft_itoa:
+_ft_itoa:
+    push    rbp
+    mov     rbp, rsp
+
     xor     rcx, rcx                    ;initialize counter
     xor     r9, r9                      ;set neg flag to 0
     mov     eax, edi                    ;move number in RAX for DIV instruction
@@ -18,7 +19,7 @@ ft_itoa:
 
 .check_negative:
     and     edi, 0x80000000
-    mov     rdi, buffer
+    lea     rdi, [buffer]
     jz      .divide                     ;number is positive, proceed to main loop
     not     eax                         ;else
     inc     eax                         ;compute absolute value with binary complement
@@ -45,9 +46,11 @@ ft_itoa:
     inc     r9
     cmp     rcx, 0
     jnz     .buff_string
+    pop     rbx
 
 .dup:
     mov     byte[rdi + r9], 0
-    call    ft_strdup                   ;copy buffer string in memory and return pointer
-    pop     rbx                         ;restore RBX
+    call    _ft_strdup                  ;copy buffer string in memory and return pointer
+
+    leave
     ret
