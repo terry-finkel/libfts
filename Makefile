@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/27 17:39:41 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/01/31 17:02:41 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,21 +47,21 @@ O_FLAG :=				-O2
 OBJDIR :=				./build/
 
 #	Sources
-BONUS +=				ft_abs.asm ft_itoa.asm ft_memcmp.asm ft_strcmp.asm ft_memmove.asm
-SRC +=					ft_bzero.asm ft_isalpha.asm ft_isdigit.asm ft_puts.asm
-SRC +=					ft_isalnum.asm ft_isascii.asm ft_isprint.asm
-SRC +=					ft_tolower.asm ft_toupper.asm ft_strlen.asm ft_cat.asm
-SRC +=					ft_memset.asm ft_memcpy.asm ft_strcat.asm ft_strdup.asm
+BONUS +=				ft_abs.s ft_itoa.s ft_memcmp.s ft_strcmp.s ft_memmove.s
+SRC +=					ft_bzero.s ft_isalpha.s ft_isdigit.s ft_puts.s
+SRC +=					ft_isalnum.s ft_isascii.s ft_isprint.s
+SRC +=					ft_tolower.s ft_toupper.s ft_strlen.s ft_cat.s
+SRC +=					ft_memset.s ft_memcpy.s ft_strcat.s ft_strdup.s
 
-OBJECTS =				$(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
+OBJECTS =				$(patsubst %.s,$(OBJDIR)%.o,$(SRCS))
 
 SRCS +=					$(BONUS)
 SRCS +=					$(SRC)
 
 TESTMAIN :=				main.c
 
-vpath %.asm $(BONUS_DIR)
-vpath %.asm $(SRC_DIR)
+vpath %.s $(BONUS_DIR)
+vpath %.s $(SRC_DIR)
 
 #################
 ##    RULES    ##
@@ -70,7 +70,7 @@ vpath %.asm $(SRC_DIR)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@ar rcs $@ $(patsubst %.asm,$(OBJDIR)%.o,$(SRCS))
+	@ar rcs $@ $(patsubst %.s,$(OBJDIR)%.o,$(SRCS))
 	@ranlib $@
 	@printf "\033[92m\033[1;32mCompiling -------------> \033[91m$(NAME)\033[0m:\033[0m%-13s\033[32m[✔]\033[0m\n"
 
@@ -79,7 +79,7 @@ $(OBJECTS): | $(OBJDIR)
 $(OBJDIR):
 	@mkdir -p $@
 
-$(OBJDIR)%.o: %.asm
+$(OBJDIR)%.o: %.s
 	@printf "\033[1;92mCompiling $(NAME)\033[0m %-28s\033[32m[$<]\033[0m\n"
 	@$(NASM) $(FORMAT) $< -o $@
 	@printf "\033[A\033[2K"
