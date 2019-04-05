@@ -408,7 +408,8 @@ int     main(void) {
     //Restore STDOUT
     dup2(1010, 1);
 
-    printf(" - Please compare cat.test and ft_cat.test\n");
+    printf(" - Diff result (nothing means success):\n");
+    system("diff cat.test ft_cat.test");
     FT_CAT_TEST_END: ;
 # undef TEST_STR
 #endif
