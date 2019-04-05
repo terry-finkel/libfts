@@ -6,7 +6,7 @@
 #    By: nfinkel <nfinkel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/28 18:20:14 by nfinkel           #+#    #+#              #
-#    Updated: 2019/01/31 17:02:41 by nfinkel          ###   ########.fr        #
+#    Updated: 2019/04/05 15:26:32 by nfinkel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,11 +95,7 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 	@printf "\033[1;32mCleaning binary -------> \033[91m$(NAME)\033[0m\033[1;32m:\033[0m%-13s\033[32m[✔]\033[0m\n"
 
-partialtest: $(NAME)
-	@printf "\033[92m\033[1;32mCompiling -------------> \033[91mtest.c\033[0m:\033[0m%-15s\033[32m[✔]\033[0m\n"
-	@$(CC) $(TESTMAIN) $(FLAGS) -Wno-unused-variable $(O_FLAG) $(NAME) -o test
-
-purge: fclean
+mrproper: fclean
 	@/bin/rm -f test cat.test ft_cat.test
 
 re: fclean fast
@@ -108,7 +104,7 @@ test: $(NAME)
 	@printf "\033[92m\033[1;32mCompiling -------------> \033[91mtest.c\033[0m:\033[0m%-15s\033[32m[✔]\033[0m\n"
 	@$(CC) $(TESTMAIN) $(FLAGS) $(O_FLAG) $(NAME) -o $@
 
-.PHONY: all cat clean fast fclean purge re test
+.PHONY: all cat clean fast fclean mrproper re test
 
 #################
 ##  WITH LOVE  ##
