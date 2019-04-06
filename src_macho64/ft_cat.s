@@ -22,8 +22,7 @@ _ft_cat:
     mov     rax, SYS_READ
     syscall                         ;read buffer_size bytes
 
-    cmp     rax, -1
-    je      .end                    ;exit if read failed
+    jc      .end                    ;exit if read failed
 
     mov     r14, rax                ;save count
 
