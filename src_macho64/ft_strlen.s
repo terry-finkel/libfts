@@ -5,7 +5,6 @@ _ft_strlen:
     push    rbp
     mov     rbp, rsp
 
-    push    rdi
     mov     rcx, -1
     xor     al, al
     cld
@@ -14,6 +13,5 @@ _ft_strlen:
     not     rcx
     lea     rax, [rcx - 1]
 
-    pop     rdi
     leave
     ret

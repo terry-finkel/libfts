@@ -8,8 +8,12 @@ section .text
     global  ft_cat
 
 ft_cat:
+    push    rbp
+    mov     rbp, rsp
+
+    push    r15
+    push    r14
     mov     r15, buffer
-    mov     byte[r15 + 0xfff], 0    ;set last byte of buffer at 0 in case file is larger than 4095 bytes
     mov     r15, rdi
 
 .loop:
@@ -17,7 +21,6 @@ ft_cat:
     mov     rdx, 0xfff
     mov     rax, SYS_READ
     syscall                         ;read buffer_size bytes
-
     jc      .end                    ;exit if read failed
 
     mov     r14, rax                ;save count
@@ -35,4 +38,7 @@ ft_cat:
     jmp     .loop
 
 .end:
+    pop     r14
+    pop     r15
+    leave
     ret

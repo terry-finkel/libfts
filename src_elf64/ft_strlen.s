@@ -2,7 +2,8 @@ section .text
     global  ft_strlen
 
 ft_strlen:
-    push    rdi
+    push    rbp
+    mov     rbp, rsp
 
     mov     rcx, -1
     xor     al, al
@@ -11,5 +12,6 @@ ft_strlen:
 
     not     rcx
     lea     rax, [rcx - 1]
-    pop     rdi
+
+    leave
     ret

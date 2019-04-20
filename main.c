@@ -47,6 +47,7 @@ const char      *__empty_string__ = "",
                 *__ft_memcpy_src__ = "((E)CX)",
                 *__ft_memmove_str__ = "Convert Word to Doubleword/Convert Doubleword to Quadword",
                 *__ft_memset_str__ = "Salut je fais de l'assembleur et je suis trop fort!",
+                *__ft_puts_str__ = "Orange. It's orange.",
                 *__ft_strcat_str_1__ = "Le miel e",
                 *__ft_strcat_str_2__ = "t la foret!",
                 *__ft_strcmp_str__ = "We won’t get too fancy",
@@ -246,13 +247,12 @@ int     main(void) {
 #if FT_PUTS_TEST
 # define TEST_STR "ft_puts"
     printf("\n\x1b[1;33mStarting test for %s...\x1b[0m\n", TEST_STR);
-    snprintf(__ft_bzero__, __ft_bzero_str_len__ + 1, "%s", __ft_bzero_str__);
     printf(" - \x1b[1;33mTEST1: User defined string\x1b[0m\n");
-    printf(" - Test string: \"%s\"\n - Output using puts: ", __ft_bzero__);
-	ret_value = puts(__ft_bzero__);
+    printf(" - Test string: \"%s\"\n - Output using puts: ", __ft_puts_str__);
+	ret_value = puts(__ft_puts_str__);
 	printf(" - Return value with puts: %d\n", ret_value);
 	dprintf(STDOUT_FILENO, " - Output using ft_puts: ");
-	ft_ret_value = ft_puts(__ft_bzero__);
+	ft_ret_value = ft_puts(__ft_puts_str__);
     printf(" - Return value with ft_puts: %d\n", ft_ret_value);
     success = ret_value == ft_ret_value ? 1 : 0;
     printf(" - \x1b[1;33mTEST1: \x1b[0m%s\x1b[0m\n", success ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
@@ -265,7 +265,16 @@ int     main(void) {
     printf(" - Return value with ft_puts: %d\n", ft_ret_value);
     success2 = ret_value == ft_ret_value ? 1 : 0;
     printf(" - \x1b[1;33mTEST2: \x1b[0m%s\x1b[0m\n", success2 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
-    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    printf(" - \x1b[1;33mTEST3: NULL\x1b[0m\n");
+    printf(" - Output using puts: ");
+    ret_value = puts(NULL);
+    printf(" - Return value with puts: %d\n", ret_value);
+    dprintf(STDOUT_FILENO, " - Output using ft_puts: ");
+    ft_ret_value = ft_puts(NULL);
+    printf(" - Return value with ft_puts: %d\n", ft_ret_value);
+    success3 = ret_value == ft_ret_value ? 1 : 0;
+    printf(" - \x1b[1;33mTEST3: \x1b[0m%s\x1b[0m\n", success3 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
+    printf(" - \x1b[1;33m%s, result: \x1b[0m%s\x1b[0m\n", TEST_STR, success && success2 && success3 ? "\x1b[32mSUCCESS" : "\x1b[1;34mFAIL");
 # undef TEST_STR
 #endif
 

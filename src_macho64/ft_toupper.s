@@ -10,7 +10,7 @@ _ft_toupper:
     jl      .end
     cmp     rax, 'z'
     jg      .end
-    xor      rax, 0b100000
+    xor     rax, 0b100000
 
 .end:
     leave

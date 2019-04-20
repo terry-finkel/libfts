@@ -21,6 +21,7 @@ _ft_strdup:
     pop     rcx
     pop     rsi
     mov     rdi, rax
+    cld
     rep     movsb
 
 .end:

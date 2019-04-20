@@ -13,11 +13,13 @@ _ft_memmove:
     mov     rax, rdi
     lea     rdi, [buffer]
     mov     rcx, rdx
+    cld
     rep     movsb
 
     mov     rdi, rax
     lea     rsi, [buffer]
     mov     rcx, rdx
+    cld
     rep     movsb
 
     leave

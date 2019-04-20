@@ -7,6 +7,7 @@ _ft_bzero:
 
     mov     rcx, rsi
     xor     al, al
+    cld
     rep     stosb
 
     leave

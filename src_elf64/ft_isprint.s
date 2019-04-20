@@ -2,6 +2,9 @@ section .text
     global  ft_isprint
 
 ft_isprint:
+    push    rbp
+    mov     rbp, rsp
+
     xor     rax, rax
     cmp     rdi, 32
     jl      .end

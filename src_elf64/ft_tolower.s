@@ -2,6 +2,9 @@ section .text
     global  ft_tolower
 
 ft_tolower:
+    push    rbp
+    mov     rbp, rsp
+
     mov     rax, rdi
     cmp     rax, 'A'
     jl      .end
@@ -10,4 +13,5 @@ ft_tolower:
     or      rax, 0b100000
 
 .end:
+    leave
     ret

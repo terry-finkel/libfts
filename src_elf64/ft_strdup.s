@@ -4,8 +4,12 @@ section .text
     extern  malloc
 
 ft_strdup:
+    push    rbp
+    mov     rbp, rsp
+
     push    rdi
     call    ft_strlen
+    inc     rax
     push    rax
 
     mov     rdi, rax
@@ -17,6 +21,7 @@ ft_strdup:
     pop     rcx
     pop     rsi
     mov     rdi, rax
+    cld
     rep     movsb
 
 .end:

@@ -3,6 +3,8 @@ section .text
     extern  ft_strlen
 
 ft_strcat:
+    push    rbp
+    mov     rbp, rsp
     push    rdi
 
     xor     al, al
@@ -13,7 +15,7 @@ ft_strcat:
     dec     rdi
     push    rdi
     mov     rdi, rsi
-    call    ft_strlen
+    call    _ft_strlen
 
     mov     rcx, rax
     inc     rcx
@@ -21,4 +23,5 @@ ft_strcat:
     rep     movsb
 
     pop     rax
+    leave
     ret
